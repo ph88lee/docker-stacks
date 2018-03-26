@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/home-docker-reg/home-docker-reg.iml" filepath="$PROJECT_DIR$/home-docker-reg/home-docker-reg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/docker-stacks.iml" filepath="$PROJECT_DIR$/.idea/docker-stacks.iml" />
     </modules>
   </component>
 </project>
