@@ -10,8 +10,10 @@ services:
         constraints:
           - node.labels.com.ferguslee.home.docker-registry == true
     secrets:
-      - home-docker-reg.crt
-      - home-docker-reg.key
+      - source: home-docker-reg.1.crt
+        target: home-docker-reg.crt
+      - source: home-docker-reg.key
+        target: home-docker-reg.key
     environment:
       REGISTRY_HTTP_TLS_CERTIFICATE: /run/secrets/home-docker-reg.crt
       REGISTRY_HTTP_TLS_KEY: /run/secrets/home-docker-reg.key
@@ -27,7 +29,7 @@ volumes:
   home-docker-reg-auth:
 
 secrets:
-  home-docker-reg.crt:
+  home-docker-reg.1.crt:
     external: true
   home-docker-reg.key:
     external: true
