@@ -10,7 +10,7 @@ services:
         constraints:
           - node.labels.com.ferguslee.home.docker-registry == true
     secrets:
-      - source: home-docker-reg.1.crt
+      - source: home-docker-reg.crt
         target: home-docker-reg.crt
       - source: home-docker-reg.key
         target: home-docker-reg.key
