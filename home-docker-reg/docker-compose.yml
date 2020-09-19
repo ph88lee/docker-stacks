@@ -29,7 +29,7 @@ volumes:
   home-docker-reg-auth:
 
 secrets:
-  home-docker-reg.1.crt:
+  home-docker-reg.crt:
     external: true
   home-docker-reg.key:
     external: true
