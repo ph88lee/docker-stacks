@@ -1,0 +1,41 @@
+version: "3.5"
+services:
+  docker-reg:
+    image: registry:2
+    ports:
+      - 7000:5000
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.com.ferguslee.core.docker-reg == true
+    configs:
+      - source: docker-reg_config.yml
+        target: /etc/docker/registry/config.yml
+    secrets:
+      - source: docker-reg_tls.crt
+        target: tls.crt
+      - source: docker-reg_tls.key
+        target: tls.key
+    volumes:
+      - docker-reg_data:/var/lib/registry
+      - docker-reg_auth:/auth
+
+volumes:
+  docker-reg_data:
+    name: core_docker-reg_data
+  docker-reg_auth:
+    name: core_docker-reg_auth
+
+configs:
+  docker-reg_config.yml:
+    name: core_docker-reg_config.yml
+    file: ./docker-reg/config.yml
+
+secrets:
+  docker-reg_tls.crt:
+    name: core_docker-reg_tls.crt
+    external: true
+  docker-reg_tls.key:
+    name: core_docker-reg_tls.key
+    external: true

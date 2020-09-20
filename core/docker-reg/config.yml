@@ -14,8 +14,8 @@ auth:
 http:
   addr: :5000
   tls:
-    certificate: /run/secrets/https.crt
-    key: /run/secrets/https.key
+    certificate: /run/secrets/tls.crt
+    key: /run/secrets/tls.key
   headers:
     X-Content-Type-Options: [nosniff]
 
