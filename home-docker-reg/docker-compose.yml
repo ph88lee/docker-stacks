@@ -3,34 +3,34 @@ services:
   home-docker-reg:
     image: registry:2
     ports:
-      - 6000:6000
+      - 6000:5000
     deploy:
       replicas: 1
       placement:
         constraints:
           - node.labels.com.ferguslee.home.docker-registry == true
+    configs:
+      - source: config.yml
+        target: /etc/docker/registry/config.yml
     secrets:
-      - source: home-docker-reg.crt
-        target: home-docker-reg.crt
-      - source: home-docker-reg.key
-        target: home-docker-reg.key
-    environment:
-      REGISTRY_HTTP_ADDR: localhost:6000
-      REGISTRY_HTTP_TLS_CERTIFICATE: /run/secrets/home-docker-reg.crt
-      REGISTRY_HTTP_TLS_KEY: /run/secrets/home-docker-reg.key
-      REGISTRY_AUTH: htpasswd
-      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
-      REGISTRY_AUTH_HTPASSWD_REALM: Home Docker Reg Realm
+      - source: home-docker-reg_https.crt
+        target: https.crt
+      - source: home-docker-reg_https.key
+        target: https.key
     volumes:
-      - home-docker-reg-data:/var/lib/registry
-      - home-docker-reg-auth:/auth
+      - data:/var/lib/registry
+      - auth:/auth
 
 volumes:
-  home-docker-reg-data:
-  home-docker-reg-auth:
+  data:
+  auth:
+
+configs:
+  config.yml:
+    file: ./config.yml
 
 secrets:
-  home-docker-reg.crt:
+  home-docker-reg_https.crt:
     external: true
-  home-docker-reg.key:
+  home-docker-reg_https.key:
     external: true
