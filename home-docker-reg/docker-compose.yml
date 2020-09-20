@@ -3,7 +3,7 @@ services:
   home-docker-reg:
     image: registry:2
     ports:
-      - 6000:5000
+      - 7000:5000
     deploy:
       replicas: 1
       placement:
