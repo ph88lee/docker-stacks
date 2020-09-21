@@ -18,14 +18,28 @@ services:
       - source: docker-reg_tls.key
         target: tls.key
     volumes:
+      - /etc/TZ:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - docker-reg_data:/var/lib/registry
       - docker-reg_auth:/auth
+
+  gitea:
+    image: gitea/gitea:1.12.4
+    volumes:
+      - /etc/TZ:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - gitea_data:/data
+    ports:
+      - "3000:3000"
+      - "222:22"
 
 volumes:
   docker-reg_data:
     name: core_docker-reg_data
   docker-reg_auth:
     name: core_docker-reg_auth
+  gitea_data:
+    name: core_gitea_data
 
 configs:
   docker-reg_config.yml:
