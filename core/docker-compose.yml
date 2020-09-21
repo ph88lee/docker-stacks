@@ -25,13 +25,17 @@ services:
 
   gitea:
     image: gitea/gitea:1.12.4
+    ports:
+      - "3000:3000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.com.ferguslee.core.gitea == true
     volumes:
       - /etc/TZ:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - gitea_data:/data
-    ports:
-      - "3000:3000"
-      - "222:22"
 
 volumes:
   docker-reg_data:
